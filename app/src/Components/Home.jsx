@@ -8,7 +8,7 @@ const Home = () => {
     <div>
         <Navbar/>
         <Banner/>
-        <NewReleaseGame/>
+        {/* <NewReleaseGame/> */}
     </div>
   )
 }

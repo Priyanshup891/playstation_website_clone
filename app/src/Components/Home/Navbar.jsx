@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
+import { DataContext } from '../../context/DataProvider';
 import {GoSearch} from 'react-icons/go';
 import {MdKeyboardArrowDown} from 'react-icons/md';
+import {Link} from 'react-router-dom';
 
 const Navbar = () => {
     
     const sonyImageUrl = "https://www.sony.net/template/2020/en/img/logo.svg";
+    const {account} = useContext(DataContext);
 
   return (
     <NavbarContainer>
@@ -24,8 +27,14 @@ const Navbar = () => {
             <a href="#">Support<MdKeyboardArrowDown size={20} color={"#8d8d8d"}/></a>
             </Navigations>
             <SearchSignIn>
-                <SignIn href='#'>Sign In</SignIn>
-                <a href="#"><GoSearch size={20}/></a>
+                {
+                    account ? <h2 style={{color:"#000",fontSize:"1.2rem"}}>{account}</h2> :
+                <Link style={{textDecoration:"none"}} to="/signIn">
+                <SignIn>Sign In</SignIn>
+                </Link>
+                }
+                <a><GoSearch size={20}/></a>
+                
             </SearchSignIn>
         </Content>
     </NavbarContainer>
