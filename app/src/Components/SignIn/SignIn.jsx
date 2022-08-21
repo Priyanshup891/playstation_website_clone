@@ -2,17 +2,24 @@ import React, { useState, useContext } from "react";
 import styled from "styled-components";
 import { DataContext } from "../../context/DataProvider";
 import { useNavigate } from "react-router-dom";
-import { authenticateSignUp } from "../../services/api";
+import { authenticateSignUp, authenticateSignIn } from "../../services/api";
 
 const signUpInitial = {
   username:"",
   email:"",
+  password:""
+};
+
+const signInInitial = {
+  username:"",
   password:""
 }
 
 const SignIn = () => {
   const [account, toggleAccount] = useState("signIn");
   const [signUp, setSignUp] = useState(signUpInitial);
+  const [signIn, setSignIn] = useState(signInInitial);
+  const [error, setError] = useState(false);
 const navigate = useNavigate();
 
  const {setAccount} = useContext(DataContext);
@@ -21,17 +28,31 @@ const navigate = useNavigate();
     "https://my.account.sony.com/central/signin/9546b31c331059ebad4e10d876afa72f90c0cbf0/assets/images/logo_playstation.png";
   const sonyImageUrl = "https://www.sony.net/template/2020/en/img/logo.svg";
 
-  const handleChange = (e) => {
+  const onhandleSignUpChange = (e) => {
     setSignUp({...signUp, [e.target.name]: e.target.value});
-    console.log(signUp);
   }
 
-  const handleSubmit = async (event) => {
+  const onhandleSignInChange = (e) => {
+    setSignIn({...signIn, [e.target.name]: e.target.value});
+  }
+
+  const onhandleSignUpSubmit = async (event) => {
     event.preventDefault();
     let response = await authenticateSignUp(signUp);
     if(!response) return;
     setAccount(signUp.username);
     navigate('/');
+  }
+
+  const onhandleSignInSubmit = async (event) => {
+    event.preventDefault();
+    let response = await authenticateSignIn(signIn);
+    if(response.status === 200){
+      setAccount(signIn.username);
+      navigate('/');
+    } else {
+      setError(true);
+    }
   }
 
 
@@ -44,11 +65,12 @@ const navigate = useNavigate();
         <img style={{ width: "100%" }} src={logoURL} alt="playstation" />
         {account === "signIn" ? (
           <>
-            <form action="">
+            <form onSubmit={(event) => onhandleSignInSubmit(event)}>
               <p>Sign in to PlayStation with one of your Sony accounts.</p>
-              <input type="text" placeholder="Enter Username" name="username" />
-              <input type="password" placeholder="Enter Password" name="password" />
-              <button>Sign In</button>
+              {error && <p style={{color:"red", fontWeight:"600"}}>Please enter valid username and password</p>}
+              <input type="text" placeholder="Enter Username" name="username" onChange={(e) => onhandleSignInChange(e)} />
+              <input type="password" placeholder="Enter Password" name="password" onChange={(e) => onhandleSignInChange(e)} />
+              <button type="submit">Sign In</button>
             </form>
             <p>OR</p>
             <button onClick={() => toggleAccount("signUp")}>
@@ -57,11 +79,11 @@ const navigate = useNavigate();
           </>
         ) : (
           <>
-            <form onSubmit={(event) => handleSubmit(event)}>
+            <form onSubmit={(event) => onhandleSignUpSubmit(event)}>
               <p>Sign up to PlayStation with one of your Sony accounts.</p>
-              <input type="text" placeholder="Enter Username" name="username" onChange={(e) => handleChange(e)} />
-              <input type="email" placeholder="Enter Email" name="email" onChange={(e) => handleChange(e)} />
-              <input type="password" placeholder="Enter Password" name="password" onChange={(e) => handleChange(e)} />
+              <input type="text" placeholder="Enter Username" name="username" onChange={(e) => onhandleSignUpChange(e)} />
+              <input type="email" placeholder="Enter Email" name="email" onChange={(e) => onhandleSignUpChange(e)} />
+              <input type="password" placeholder="Enter Password" name="password" onChange={(e) => onhandleSignUpChange(e)} />
               <button type="submit">Sign Up</button>
             </form>
             <p>OR</p>
