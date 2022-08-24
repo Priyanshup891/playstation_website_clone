@@ -1,4 +1,5 @@
 import User from "../model/user_schema.js";
+import Game from '../model/games_schema.js';
 
 export const userSignUp = async (req,res) => {
     try{
@@ -32,6 +33,16 @@ export const userSignIn = async(req,res) => {
        }
 
     }catch(error){
+        res.status(500).json("error", error.message);
+    }
+}
+
+export const getGames = async (req,res) => {
+    try{
+        const game = await Game.find({});
+        res.status(200).json(game);
+
+    } catch(error){
         res.status(500).json("error", error.message);
     }
 }
