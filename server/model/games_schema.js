@@ -9,8 +9,6 @@ const gamesSchema = new mongoose.Schema({
     poster_path: String,
     background_path:String,
     title:String,
-    quality:Array,
-    console_type:Array,
     price:String,
     release_date:String,
     question:String,

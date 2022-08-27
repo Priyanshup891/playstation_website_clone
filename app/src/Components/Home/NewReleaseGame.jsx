@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const NewReleaseGame = ({gamesData}) => {
   return (
@@ -10,10 +11,12 @@ const NewReleaseGame = ({gamesData}) => {
             <Grid>
                 {
                     gamesData.map((data) => (
+                        <Link style={{textDecoration:"none"}} to={`/detail/${data._id}`}>
                         <div style={{display:"flex", flexDirection:"column", margin:"1.5rem 1rem"}}>
                         <img src={data.poster_path} alt="game" />
                         <span>{data.title}</span>
                         </div>
+                        </Link>
                     ))
                 }
             </Grid>
@@ -28,7 +31,7 @@ const NewReleaseGame = ({gamesData}) => {
 
 const Container = styled.div`
 width: 100%;
-margin-top: 250px;
+margin-top: 200px;
 height: 100%;
 background-color: #000;
 padding: 2rem 0;

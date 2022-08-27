@@ -18,3 +18,19 @@ export const getGames = () => async (dispatch) => {
     });
   }
 };
+
+export const getGameDetail = (id) => async (dispatch) => {
+  try{
+    dispatch({type: actionTypes.GET_GAMES_DETAILS_REQUEST});
+    const { data } = await axios.get(`${URL}/detail/${id}`);
+    dispatch({
+      type: actionTypes.GET_GAMES_DETAILS_SUCCESS,
+      payload: data,
+    });
+  }catch(error){
+    dispatch({
+      type: actionTypes.GET_GAMES_DETAILS_FAIL,
+      payload: error.message,
+    });
+  }
+}

@@ -7,7 +7,7 @@ export const bannerData = [
     logo: "https://gmedia.playstation.com/is/image/SIEPDC/rollerdrome-logo-01-ps4-ps5-en-19may22?$1200px--t$",
     title: "Prepare to enter the Rollerdrome",
     overview:
-      "Experience an intense third person action shooter set in a dystopian retrofuture, out now on PS4 &amp; PS5",
+      "Experience an intense third person action shooter set in a dystopian retrofuture, out now on PS4 PS5",
   },
   {
     banner_image:

@@ -18,7 +18,7 @@ const Navbar = () => {
         </Brand>
         <Content>
             <Navigations>
-            <img src={logo} alt="playstation_logo" />
+            <Link to="/"><img src={logo} alt="playstation_logo" /></Link>
             <a href="#">Games<MdKeyboardArrowDown size={20} color={"#8d8d8d"}/></a>
             <a href="#">Hardware<MdKeyboardArrowDown size={20} color={"#8d8d8d"}/></a>
             <a href="#">Services<MdKeyboardArrowDown size={20} color={"#8d8d8d"}/></a>

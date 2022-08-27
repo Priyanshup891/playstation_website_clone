@@ -38,7 +38,7 @@ const Banner = () => {
       className={active ? "active" : "inactive"}
       onClick={() => onClick()}
       >
-        <img style={{borderRadius:"0.7rem", width:"100%"}} src={bannerData[index].image} alt="" />
+        <img style={{borderRadius:"0.7rem", width:"200px"}} src={bannerData[index].image} alt="" />
       </button>
       </div>
     );
