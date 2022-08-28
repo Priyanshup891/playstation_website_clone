@@ -5,6 +5,7 @@ import { DataContext } from '../../context/DataProvider';
 import {GoSearch} from 'react-icons/go';
 import {MdKeyboardArrowDown} from 'react-icons/md';
 import {Link} from 'react-router-dom';
+import {BsPersonSquare, BsCart4} from 'react-icons/bs';
 
 const Navbar = () => {
     
@@ -28,12 +29,12 @@ const Navbar = () => {
             </Navigations>
             <SearchSignIn>
                 {
-                    account ? <h2 style={{color:"#000",fontSize:"1.2rem"}}>{account}</h2> :
+                    account ? <h2 style={{color:"#000",fontSize:"1.2rem", display:"flex", alignItems:"center", gap:"0.5rem"}}><BsPersonSquare size={20}/> {account}</h2> :
                 <Link style={{textDecoration:"none"}} to="/signIn">
                 <SignIn>Sign In</SignIn>
                 </Link>
                 }
-                <a><GoSearch size={20}/></a>
+                <a><BsCart4 size={25}/></a>
                 
             </SearchSignIn>
         </Content>
