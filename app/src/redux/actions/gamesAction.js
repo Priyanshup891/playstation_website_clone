@@ -37,7 +37,7 @@ export const getGameDetail = (id) => async (dispatch) => {
 
 export const addToCart = (id, quantity) => async(dispatch) => {
   try{
-    const {data} = await axios.get(`${URL}/game/${id}`);
+    const {data} = await axios.get(`${URL}/detail/${id}`);
     dispatch({
       type: actionTypes.ADD_TO_CART,
       payload: {...data, quantity}

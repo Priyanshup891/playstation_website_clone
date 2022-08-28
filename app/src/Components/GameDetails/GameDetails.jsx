@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,9 @@ import {TbDeviceGamepad2, TbNetwork} from 'react-icons/tb';
 import {MdOutlineBookOnline} from 'react-icons/md';
 import {BsPeopleFill} from 'react-icons/bs';
 import {RiRemoteControlLine} from 'react-icons/ri';
+import { addToCart } from "../../redux/actions/gamesAction";
+import Cart from "../Cart/Cart";
+
 
 const responsive = {
   superLargeDesktop: {
@@ -37,6 +40,12 @@ const GameDetails = () => {
 
   const dispatch = useDispatch();
   const { loading, game } = useSelector((state) => state.getGameDetail);
+  const [quantity, setQuantity] = useState(1);
+  const [isOpen, setIsOpen] = React.useState(false)
+  const toggleDrawer = () => {
+      setIsOpen((prevState) => !prevState);
+  }
+
 
   useEffect(() => {
     if (game && id !== game._id) {
@@ -92,6 +101,11 @@ const GameDetails = () => {
     );
   };
 
+  const addGameToCart = () => {
+    toggleDrawer();
+   dispatch(addToCart(id,quantity));
+  }
+
   return (
     <DetailContanier>
       <div>
@@ -106,7 +120,7 @@ const GameDetails = () => {
                 <h3>Rs {game.price}</h3>
                 {arrayType(game.console_type)}
                 <div>
-                  <button>Add to Cart</button>
+                  <button onClick={() => addGameToCart()}>Add to Cart</button>
                 </div>
                 <p>Release date: {game.release_date}</p>
                 <GamePlayDetail>
@@ -133,6 +147,7 @@ const GameDetails = () => {
           </>
         )}
       </div>
+      <Cart open={isOpen} drawertoggle={toggleDrawer}/>
     </DetailContanier>
   );
 };

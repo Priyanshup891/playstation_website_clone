@@ -6,11 +6,25 @@ import {GoSearch} from 'react-icons/go';
 import {MdKeyboardArrowDown} from 'react-icons/md';
 import {Link} from 'react-router-dom';
 import {BsPersonSquare, BsCart4} from 'react-icons/bs';
+import Drawer from 'react-modern-drawer';
+import 'react-modern-drawer/dist/index.css';
+import Cart from '../Cart/Cart';
+
+
+
 
 const Navbar = () => {
+
     
     const sonyImageUrl = "https://www.sony.net/template/2020/en/img/logo.svg";
     const {account} = useContext(DataContext);
+
+    const [isOpen, setIsOpen] = React.useState(false)
+    const toggleDrawer = () => {
+        setIsOpen((prevState) => !prevState);
+    }
+
+
 
   return (
     <NavbarContainer>
@@ -34,7 +48,8 @@ const Navbar = () => {
                 <SignIn>Sign In</SignIn>
                 </Link>
                 }
-                <a><BsCart4 size={25}/></a>
+                <button style={{background:"none", border:"none", cursor:"pointer"}} onClick={toggleDrawer}><BsCart4 color='#000' size={25}/></button>
+                <Cart open={isOpen} drawertoggle={toggleDrawer}/>
                 
             </SearchSignIn>
         </Content>
