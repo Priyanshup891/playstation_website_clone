@@ -10,7 +10,7 @@ body{
     font-family: 'Roboto', sans-serif;
 }
 
-.active,.inactive{
+/* .active,.inactive{
 transform: translateY(60px);
 border: none;
 background: none;
@@ -24,8 +24,5 @@ padding: 4px;
 .active{
     border: 3px solid rgb(0, 106, 255);
     border-radius: 0.7rem;
-}
+} */
 
-@media screen {
-    
-}
