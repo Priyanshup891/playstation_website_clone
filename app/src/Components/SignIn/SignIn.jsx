@@ -25,7 +25,7 @@ const navigate = useNavigate();
  const {setAccount} = useContext(DataContext);
 
   const logoURL =
-    "https://my.account.sony.com/central/signin/9546b31c331059ebad4e10d876afa72f90c0cbf0/assets/images/logo_playstation.png";
+    "https://my.account.sony.com/central/signin/5bc96784c2c2db0963a7797a8cc089014498053d/assets/images/logo_playstation.png";
   const sonyImageUrl = "https://www.sony.net/template/2020/en/img/logo.svg";
 
   const onhandleSignUpChange = (e) => {
@@ -98,7 +98,7 @@ const navigate = useNavigate();
 const SignInContainer = styled.div`
   width: 100%;
   height: 100vh;
-  background-image: url(https://my.account.sony.com/central/signin/9546b31c331059ebad4e10d876afa72f90c0cbf0/assets/images/wallpaper.jpg);
+  background-image: url(${"https://my.account.sony.com/central/signin/5bc96784c2c2db0963a7797a8cc089014498053d/assets/images/wallpaper.jpg"});
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getGameDetail } from "../../redux/actions/gamesAction";
 import Carousel from "react-multi-carousel";
@@ -13,8 +13,10 @@ import { BsPeopleFill } from "react-icons/bs";
 import { RiRemoteControlLine } from "react-icons/ri";
 import { addToCart } from "../../redux/actions/gamesAction";
 import Cart from "../Cart/Cart";
+import { DataContext } from "../../context/DataProvider";
 
 const responsive = {
+
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
@@ -34,7 +36,13 @@ const responsive = {
   },
 };
 
+
+
 const GameDetails = () => {
+
+  const {account} = useContext(DataContext);
+  const navigate = useNavigate();
+
   const { id } = useParams();
 
   const dispatch = useDispatch();
@@ -115,9 +123,13 @@ const GameDetails = () => {
   };
 
   const addGameToCart = () => {
-    toggleDrawer();
-    setQuantity(1);
-    dispatch(addToCart(id, quantity));
+    if(account){
+      toggleDrawer();
+      setQuantity(1);
+      dispatch(addToCart(id, quantity));
+    } else {
+      navigate("/signIn")
+    }
   };
 
   return (

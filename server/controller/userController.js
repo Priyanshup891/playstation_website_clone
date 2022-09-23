@@ -1,5 +1,7 @@
 import User from "../model/user_schema.js";
 import Game from "../model/games_schema.js";
+import paytmcheksum from "../paytm/PaytmChecksum.js";
+import { paytmMerchantKey, paytmParams } from "../index.js";
 
 export const userSignUp = async (req, res) => {
   try {
@@ -48,6 +50,23 @@ export const getGameById = async (req, res) => {
     const id = req.params.id;
     const game = await Game.findOne({ _id: id });
     res.status(200).json(game);
+  } catch (error) {
+    res.status(500).json("error", error.message);
+  }
+};
+
+export const addPayment = async (req, res) => {
+  try {
+    let paytmChecksum = await paytmcheksum.generateSignature(
+      paytmParams,
+      paytmMerchantKey
+    );
+    let params = {
+      ...paytmParams,
+      CHECKSUMHASH: paytmChecksum,
+    };
+
+    res.status(200).json(params);
   } catch (error) {
     res.status(500).json("error", error.message);
   }

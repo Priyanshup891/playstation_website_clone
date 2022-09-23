@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = "http://localhost:5000";
+const URL = "http://localhost:4000";
 
 export const authenticateSignUp = async (data) => {
     try{
@@ -16,5 +16,14 @@ export const authenticateSignIn = async (data) => {
     } catch(error){
         console.log(error.message);
         return error.response;
+    }
+}
+
+export const payWithPaytm = async (data) => {
+    try {
+        let response =  await axios.post(`${URL}/payment`, data);
+        return response.data;
+    } catch (error) {
+        console.log(error.message);
     }
 }
