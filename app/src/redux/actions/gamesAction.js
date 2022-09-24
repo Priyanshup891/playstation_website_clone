@@ -2,7 +2,7 @@ import axios from "axios";
 
 import * as actionTypes from "../constants/gameConstants";
 
-const URL = "http://localhost:4000";
+const URL = "http://localhost:5000";
 
 export const getGames = () => async (dispatch) => {
   try {
