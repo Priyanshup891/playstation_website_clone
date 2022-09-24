@@ -2,12 +2,9 @@ import React, {useContext} from 'react';
 import styled from 'styled-components';
 import logo from '../../assets/images/logo.png';
 import { DataContext } from '../../context/DataProvider';
-import {GoSearch} from 'react-icons/go';
 import {MdKeyboardArrowDown} from 'react-icons/md';
 import {Link} from 'react-router-dom';
 import {BsPersonSquare, BsCart4} from 'react-icons/bs';
-import Drawer from 'react-modern-drawer';
-import 'react-modern-drawer/dist/index.css';
 import Cart from '../Cart/Cart';
 import { useSelector } from 'react-redux';
 

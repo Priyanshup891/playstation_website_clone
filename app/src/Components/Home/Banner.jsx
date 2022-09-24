@@ -1,52 +1,106 @@
 import React from "react";
 import styled from "styled-components";
 import { bannerData } from "../../Constant/data";
-
-import Carousel from "react-bootstrap/Carousel";
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+const responsive = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 1,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const Banner = () => {
   return (
     <BannerContainer>
-      <Carousel fade interval={5000}>
-        {bannerData.map((data) => (
-          <Carousel.Item>
-            <img src={data.banner_image} alt="banner_image" />
-            <Carousel.Caption
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "flex-start",
-                background:
-                  "linear-gradient(90deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))",
-                width: "100%",
-                top: 0,
-                left: 0,
-                height: "100%",
-                paddingLeft: "200px",
-                paddingTop: "100px",
-              }}
-            >
-              <img style={{ width: "350px" }} src={data.logo} alt="logo" />
-              <h1>{data.title}</h1>
-              <p>{data.overview}</p>
+      <Carousel
+        additionalTransfrom={0}
+        autoPlay
+        swipeable={false}
+        arrows={false}
+        autoPlaySpeed={5000}
+        infinite
+        responsive={responsive}
+        rewind={false}
+        rewindWithAnimation={false}
+        rtl={false}
+        shouldResetAutoplay
+        showDots={false}
+        slidesToSlide={1}
+      >
+        {bannerData.map((banner) => (
+          <BannerCard>
+            <img src={banner.banner_image} alt={banner.title} />
+            <CardContent>
+              <img src={banner.logo} alt="logo" />
+              <h1>{banner.title}</h1>
+              <p>{banner.overview}</p>
               <button>Pre-order now</button>
-            </Carousel.Caption>
-          </Carousel.Item>
+            </CardContent>
+          </BannerCard>
         ))}
       </Carousel>
+      ;
     </BannerContainer>
   );
 };
 
 const BannerContainer = styled.div`
-width: 100%;
-height: 50vh;
+  margin-bottom: 30px;
+`;
 
-img{
-  width: 100%;
-}
+const BannerCard = styled.div`
+  position: relative;
+  height: 500px;
+  overflow: hidden;
+  cursor: pointer;
 
-h1 {
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: cover;
+    object-position: top;
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1),
+      50%,
+      rgba(0, 0, 0, 0.2)
+    );
+  }
+`;
+
+const CardContent = styled.div`
+  position: absolute;
+  right: 80px;
+  bottom: 60px;
+  left: 80px;
+  z-index: 2;
+
+  img {
+    width: 350px;
+  }
+
+  h1 {
     color: #fff;
     font-weight: 100;
     font-size: 2.5rem;

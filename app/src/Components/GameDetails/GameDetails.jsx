@@ -87,7 +87,7 @@ const GameDetails = () => {
     return (
       <div
         style={{
-          background: "#1b1b1b",
+          background: "#000",
           padding: "3rem 7rem",
           width: "100%",
           height: "100%",
@@ -137,8 +137,8 @@ const GameDetails = () => {
       <div>
         {game && (
           <>
-            <div>
-              <BgImage src={game.background_path} alt="" />
+            <DetailContent>
+              <img src={game.background_path} alt="" />
               <Info>
                 <h1>{game.title}</h1>
                 <span>2K</span>
@@ -180,11 +180,11 @@ const GameDetails = () => {
                   </div>
                 </GamePlayDetail>
               </Info>
-            </div>
+            </DetailContent>
             {imageList(game)}
             <div
               style={{
-                background: "#1b1b1b",
+                background: "#000",
                 width: "100%",
                 height: "100vh",
                 padding: "3rem 7rem",
@@ -205,33 +205,47 @@ const DetailContanier = styled.div`
   height: 80vh;
 `;
 
-const BgImage = styled.img`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100px;
-  z-index: -1;
+const DetailContent = styled.div`
+ position: relative;
+  height: 600px;
+  overflow: hidden;
+  cursor: pointer;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    object-fit: cover;
+    object-position: top;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 1),
+      50%,
+      rgba(0, 0, 0, 0.2)
+    );
+  }
 `;
 
 const Info = styled.div`
-  width: 100%;
-  height: 80vh;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 1.5rem;
-  padding-top: 5rem;
-  padding-left: 7rem;
-  padding-bottom: 1rem;
-  background: linear-gradient(rgba(27, 27, 27, 0), 70%, #1b1b1b),
-    linear-gradient(90deg, #1b1b1b, 50%, rgba(0, 0, 0, 0));
-  h1 {
-    color: #fff;
-    font-size: 3rem;
-    font-weight: 200;
+ position: absolute;
+  right: 80px;
+  bottom: 60px;
+  left: 80px;
+  z-index: 2;
+  display:flex ;
+  flex-direction:column ;
+  gap:0.2rem;
+
+  h1{
+    color:#fff ;
+    font-size:3rem ;
   }
 
   span {
@@ -255,6 +269,7 @@ const Info = styled.div`
     border: none;
     color: #fff;
     border-radius: 3rem;
+    margin-bottom:1rem ;
   }
 
   p {
